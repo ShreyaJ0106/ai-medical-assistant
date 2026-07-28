@@ -1,80 +1,49 @@
-# 🏥 AI Medical Assistant
+# AI Medical Assistant
 
-## 📖 Overview
+An AI-powered Medical Assistant built using **n8n**, **Google Gemini**, and **Python (upcoming)**.
 
-AI Medical Assistant is an intelligent healthcare automation project built using **n8n**, **PostgreSQL**, **Docker**, and **Google Gemini AI**. It automates patient registration, symptom analysis, doctor recommendations, appointment scheduling, and email notifications.
+## Features
 
----
+- Patient information collection
+- Symptom validation
+- AI-generated medical guidance
+- Doctor recommendation
+- Medical disclaimer
+- n8n workflow automation
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - n8n
-- PostgreSQL
-- Docker
-- Gmail API
-- Google Gemini AI
+- Google Gemini API
 - Git & GitHub
 
----
+## Project Status
 
-## ✅ Day 1 Features
+### ✅ Completed
+- Webhook integration
+- Input validation
+- AI Agent workflow
+- Gemini integration
+- Workflow export
 
-- Patient Registration using Webhook
-- Store Patient Details in PostgreSQL
-- Send Registration Confirmation Email
-- Respond to Webhook
-- GitHub Repository Setup
+### 🚧 In Progress
+- FastAPI backend
+- ChromaDB
+- RAG pipeline
+- Medical PDF search
+- Website integration
 
----
+## Project Structure
 
-## 📅 Upcoming Features (Day 2+)
-
-- Input Validation
-- Duplicate Email Detection
-- AI Symptom Analysis (Gemini)
-- Doctor Recommendation
-- Medical Report Generation
-- Appointment Booking
-- Google Calendar Integration
-- Reminder Emails
-
----
-
-## 📂 Project Structure
-
-```text
+```
 ai-medical-assistant/
-│── README.md
-│── docker-compose.yml
-│── .gitignore
-│── backend/
-│── frontend/
-│── workflows/
+│
+├── workflows/
+├── medical-data/
+├── backend/ (coming soon)
+└── README.md
 ```
 
----
+## Author
 
-## 📌 Workflow
-
-```text
-Patient
-   │
-   ▼
-Webhook
-   │
-   ▼
-PostgreSQL
-   │
-   ▼
-Gmail
-   │
-   ▼
-Response
-```
-
----
-
-## 📈 Project Status
-
-- ✅ Day 1 Completed
-- 🚧 Day 2 In Progress
+**Shreya Jaiswal**
