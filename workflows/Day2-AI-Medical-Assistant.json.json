@@ -1,0 +1,285 @@
+{
+  "name": "AI Medical Assistant - Day 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "patient-intake",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f536f99d-7910-436d-83f5-e5fdabd5c69f",
+      "name": "Webhook",
+      "webhookId": "14110eb8-4161-4603-b433-6ce2a3719886"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d190082e-82b1-4d1a-8e49-c559f800d01c",
+              "name": "=name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "b901e24c-e258-4800-a478-deba515ac1ca",
+              "name": "age",
+              "value": "={{ $json.body.age }}",
+              "type": "number"
+            },
+            {
+              "id": "d5323281-cfe8-4d3f-b2ca-e7c7a515785e",
+              "name": "gender",
+              "value": "={{ $json.body.gender }}",
+              "type": "string"
+            },
+            {
+              "id": "2ebddccf-4191-452a-bfd2-4558cc99b5de",
+              "name": "symptoms",
+              "value": "= {{ $json.body.symptoms }}",
+              "type": "string"
+            },
+            {
+              "id": "6fa22787-0629-4111-826d-534cc194b7aa",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "bfb98134-71d1-488d-bc75-bf724ae1116a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1c98b085-1540-4b01-80f7-068eb3b3e782",
+              "leftValue": "={{ $json.symptoms.trim() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "23023bb6-47a2-4a94-a791-91d61314e0c2",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI Medical Assistant.\n\nYou provide general health guidance based on the patient's symptoms.\n\nRules:\n- Never provide a confirmed diagnosis.\n- Mention only possible medical conditions.\n- Mention severity as Low, Medium, or High.\n- Recommend consulting an appropriate doctor.\n- If symptoms indicate an emergency (such as chest pain, severe bleeding, unconsciousness, stroke symptoms, or difficulty breathing), advise immediate emergency medical care.\n- Always include a medical disclaimer.\n\nPatient Details\n\nName: {{$json.name}}\n\nAge: {{$json.age}}\n\nGender: {{$json.gender}}\n\nSymptoms: {{$json.symptoms}}\n\nRespond ONLY in the following format:\n\nPossible Conditions:\n- Condition 1\n- Condition 2\n- Condition 3\n\nSeverity:\nLow / Medium / High\n\nAdvice:\n- Advice 1\n- Advice 2\n- Advice 3\n\nDoctor Recommendation:\nMention the type of doctor the patient should consult.\n\nMedical Disclaimer:\nThis is not a confirmed diagnosis. Please consult a qualified healthcare professional.",
+        "options": {
+          "systemMessage": "You are an AI Medical Assistant.\n\nProvide general health guidance only.\n\nRules:\n- Never provide a confirmed diagnosis.\n- Suggest only possible conditions.\n- Mention severity (Low, Medium, High).\n- Recommend consulting a doctor.\n- If symptoms indicate an emergency, advise immediate emergency medical care.\n\nRespond in this format:\n\nPossible Conditions:\n...\n\nSeverity:\n...\n\nAdvice:\n...\n\nDoctor Recommendation:\n..."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        672,
+        144
+      ],
+      "id": "fcc81973-72b0-412e-8f62-0208e8e3a437",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        352
+      ],
+      "id": "cd0f83f3-00d9-4791-9521-4d504b8928c9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "5Ffkl4HCXUA3RyBL",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"response\": \"={{$json.output}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        672,
+        -64
+      ],
+      "id": "57601f01-7ed2-4f3c-8f56-b069cc125fd6",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"success\": false,\n  \"error\": \"Symptoms are required.\"\n} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1168,
+        144
+      ],
+      "id": "c9e3159e-fc80-4446-8287-38b315388196",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1383dbe-d008-4457-b936-57ec349ae612",
+              "name": "report",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        144
+      ],
+      "id": "f8136d31-a30c-408e-8ab3-c48e6cf98431",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "2503cd8d-dbf5-481c-b40c-a7c84a95b1bc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fda409eddb14b52793a22e35a047ce9c8c139bcc7f7df6f59b9559330fa91b68"
+  },
+  "nodeGroups": [],
+  "id": "vvxblwcZbC5Z1gvH",
+  "tags": []
+}

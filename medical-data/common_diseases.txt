@@ -1,0 +1,76 @@
+FEVER
+Common causes:
+- Viral fever
+- Influenza
+- Dengue
+- Malaria
+- Typhoid
+
+Symptoms:
+- High temperature
+- Chills
+- Sweating
+- Headache
+
+Advice:
+Drink plenty of fluids.
+Take adequate rest.
+Consult a doctor if fever lasts more than 3 days.
+
+-------------------------------------------------
+
+COMMON COLD
+
+Symptoms:
+- Sneezing
+- Runny nose
+- Sore throat
+- Mild cough
+
+Advice:
+Stay hydrated.
+Take sufficient rest.
+Use steam inhalation if required.
+
+-------------------------------------------------
+
+MIGRAINE
+
+Symptoms:
+- Severe headache
+- Nausea
+- Sensitivity to light
+
+Advice:
+Rest in a dark room.
+Avoid loud sounds.
+Consult a neurologist if frequent.
+
+-------------------------------------------------
+
+GASTROENTERITIS
+
+Symptoms:
+- Vomiting
+- Diarrhoea
+- Stomach pain
+
+Advice:
+Drink ORS.
+Stay hydrated.
+Seek medical attention if symptoms worsen.
+
+-------------------------------------------------
+
+HYPERTENSION
+
+Symptoms:
+Usually no symptoms.
+
+Possible signs:
+- Headache
+- Dizziness
+
+Advice:
+Monitor blood pressure regularly.
+Consult a physician.
