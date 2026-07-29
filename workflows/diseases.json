@@ -1,0 +1,107 @@
+[
+  {
+    "disease": "Common Cold",
+    "symptoms": ["fever", "cough", "sore throat", "runny nose", "sneezing"],
+    "severity": "Low",
+    "tests": ["Physical Examination"],
+    "recommendation": "Drink plenty of fluids, rest, and take over-the-counter medications if necessary."
+  },
+  {
+    "disease": "Influenza (Flu)",
+    "symptoms": ["high fever", "body ache", "fatigue", "cough", "headache", "chills"],
+    "severity": "Medium",
+    "tests": ["Rapid Influenza Diagnostic Test (RIDT)"],
+    "recommendation": "Rest, stay hydrated, and consult a doctor if symptoms worsen."
+  },
+  {
+    "disease": "COVID-19",
+    "symptoms": ["fever", "dry cough", "loss of taste", "loss of smell", "fatigue", "difficulty breathing"],
+    "severity": "High",
+    "tests": ["RT-PCR Test", "Rapid Antigen Test"],
+    "recommendation": "Isolate, monitor oxygen levels, and seek medical care if breathing difficulty develops."
+  },
+  {
+    "disease": "Pneumonia",
+    "symptoms": ["chest pain", "fever", "cough", "difficulty breathing", "fatigue"],
+    "severity": "High",
+    "tests": ["Chest X-ray", "CBC"],
+    "recommendation": "Consult a physician immediately. Antibiotics may be required."
+  },
+  {
+    "disease": "Asthma",
+    "symptoms": ["shortness of breath", "wheezing", "chest tightness", "persistent cough"],
+    "severity": "Medium",
+    "tests": ["Spirometry", "Peak Flow Test"],
+    "recommendation": "Use prescribed inhalers and avoid known triggers."
+  },
+  {
+    "disease": "Migraine",
+    "symptoms": ["headache", "nausea", "light sensitivity", "vomiting", "blurred vision"],
+    "severity": "Medium",
+    "tests": ["Neurological Examination"],
+    "recommendation": "Rest in a quiet, dark room and consult a neurologist if attacks are frequent."
+  },
+  {
+    "disease": "Hypertension",
+    "symptoms": ["headache", "dizziness", "blurred vision", "chest pain"],
+    "severity": "High",
+    "tests": ["Blood Pressure Measurement", "ECG"],
+    "recommendation": "Monitor blood pressure regularly and consult a physician."
+  },
+  {
+    "disease": "Diabetes",
+    "symptoms": ["frequent urination", "increased thirst", "weight loss", "fatigue", "blurred vision"],
+    "severity": "High",
+    "tests": ["Blood Sugar Test", "HbA1c"],
+    "recommendation": "Consult a physician for blood sugar management and lifestyle modifications."
+  },
+  {
+    "disease": "Food Poisoning",
+    "symptoms": ["vomiting", "diarrhea", "stomach pain", "nausea", "fever"],
+    "severity": "Medium",
+    "tests": ["Stool Test", "Physical Examination"],
+    "recommendation": "Drink ORS, stay hydrated, and seek medical care if dehydration occurs."
+  },
+  {
+    "disease": "Gastritis",
+    "symptoms": ["stomach pain", "nausea", "bloating", "heartburn", "vomiting"],
+    "severity": "Low",
+    "tests": ["Endoscopy", "H. pylori Test"],
+    "recommendation": "Avoid spicy food and consult a gastroenterologist if symptoms persist."
+  },
+  {
+    "disease": "Dengue",
+    "symptoms": ["high fever", "body ache", "rash", "joint pain", "headache", "nausea"],
+    "severity": "High",
+    "tests": ["NS1 Antigen Test", "CBC"],
+    "recommendation": "Maintain hydration and seek immediate medical attention."
+  },
+  {
+    "disease": "Malaria",
+    "symptoms": ["fever", "chills", "sweating", "headache", "fatigue", "vomiting"],
+    "severity": "High",
+    "tests": ["Peripheral Blood Smear", "Rapid Malaria Test"],
+    "recommendation": "Consult a physician immediately for antimalarial treatment."
+  },
+  {
+    "disease": "Typhoid",
+    "symptoms": ["high fever", "abdominal pain", "weakness", "loss of appetite", "constipation"],
+    "severity": "High",
+    "tests": ["Widal Test", "Blood Culture"],
+    "recommendation": "Seek medical care and complete the prescribed antibiotic course."
+  },
+  {
+    "disease": "Bronchitis",
+    "symptoms": ["persistent cough", "mucus", "fatigue", "shortness of breath", "mild fever"],
+    "severity": "Medium",
+    "tests": ["Chest X-ray", "Sputum Test"],
+    "recommendation": "Rest, hydrate well, and consult a doctor if symptoms last more than three weeks."
+  },
+  {
+    "disease": "Allergic Rhinitis",
+    "symptoms": ["sneezing", "runny nose", "itchy eyes", "nasal congestion"],
+    "severity": "Low",
+    "tests": ["Allergy Skin Test"],
+    "recommendation": "Avoid allergens and use antihistamines as prescribed."
+  }
+]
