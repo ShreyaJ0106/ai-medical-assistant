@@ -1,0 +1,254 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "patient-intake",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "566d9666-44d8-4d7e-a26e-89445fc6425f",
+      "name": "Webhook",
+      "webhookId": "68b71e75-c3bb-4b0a-9937-1c8b23403ba5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "759458d4-3b10-423d-a977-5633ec90eb79",
+              "name": "name",
+              "value": "={{$json.body.name}}",
+              "type": "string"
+            },
+            {
+              "id": "204f5df4-9cd7-434e-ba3d-6188d9c908c4",
+              "name": "=age",
+              "value": "={{$json.body.age}}",
+              "type": "string"
+            },
+            {
+              "id": "167cc196-0408-466a-9594-10edd34084bc",
+              "name": "=gender",
+              "value": "={{$json.body.gender}}",
+              "type": "string"
+            },
+            {
+              "id": "c9f50314-2ceb-4d76-bdba-1f6e7fb5f97b",
+              "name": "=symptoms",
+              "value": "={{$json.body.symptoms}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "f75ab811-45a6-4e0f-8740-2a0c7cb9b472",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const patient = $('Edit Fields').first().json;\n\nconst symptoms = patient.symptoms.toLowerCase().split(\" \");\n\nconst diseases = $('Load Disease Database').first().json.diseases;\n\nlet bestMatch = diseases[0];\nlet bestScore = 0;\n\nfor (const disease of diseases) {\n\n  let score = 0;\n\n  for (const symptom of symptoms) {\n\n    if (disease.symptoms.includes(symptom)) {\n      score++;\n    }\n\n  }\n\n  if (score > bestScore) {\n    bestScore = score;\n    bestMatch = disease;\n  }\n\n}\n\nreturn [\n  {\n    json: {\n      Name: patient.Name,\n      matchedDisease: bestMatch.name,\n      severity: bestMatch.severity,\n      treatment: bestMatch.treatment\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "e346cc33-08da-46a2-a197-24ee8b960fe1",
+      "name": "Disease Matching"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      diseases: [\n        {\n          name: \"Common Cold\",\n          symptoms: [\"fever\", \"headache\", \"cough\", \"sore throat\", \"runny nose\", \"sneezing\"],\n          severity: \"Low\",\n          treatment: \"Rest, drink plenty of fluids, take paracetamol if needed.\"\n        },\n        {\n          name: \"Influenza (Flu)\",\n          symptoms: [\"fever\", \"headache\", \"body pain\", \"fatigue\", \"cough\", \"chills\"],\n          severity: \"Medium\",\n          treatment: \"Rest, fluids, antiviral medicines if prescribed by a doctor.\"\n        },\n        {\n          name: \"COVID-19\",\n          symptoms: [\"fever\", \"cough\", \"loss of smell\", \"loss of taste\", \"fatigue\", \"shortness of breath\"],\n          severity: \"High\",\n          treatment: \"Isolate yourself and consult a doctor immediately if breathing difficulty occurs.\"\n        },\n        {\n          name: \"Migraine\",\n          symptoms: [\"headache\", \"nausea\", \"vomiting\", \"light sensitivity\"],\n          severity: \"Medium\",\n          treatment: \"Pain relievers, rest in a dark room, avoid triggers.\"\n        },\n        {\n          name: \"Food Poisoning\",\n          symptoms: [\"vomiting\", \"diarrhea\", \"stomach pain\", \"fever\"],\n          severity: \"Medium\",\n          treatment: \"Stay hydrated, oral rehydration solution (ORS), consult a doctor if severe.\"\n        },\n        {\n          name: \"Malaria\",\n          symptoms: [\"fever\", \"chills\", \"headache\", \"body pain\", \"sweating\"],\n          severity: \"High\",\n          treatment: \"Immediate medical attention and antimalarial medication.\"\n        },\n        {\n          name: \"Dengue\",\n          symptoms: [\"fever\", \"headache\", \"joint pain\", \"rash\", \"muscle pain\"],\n          severity: \"High\",\n          treatment: \"Drink plenty of fluids, avoid NSAIDs, seek immediate medical care.\"\n        },\n        {\n          name: \"Typhoid\",\n          symptoms: [\"fever\", \"headache\", \"stomach pain\", \"weakness\", \"loss of appetite\"],\n          severity: \"High\",\n          treatment: \"Doctor consultation and antibiotic treatment.\"\n        }\n      ]\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "8a6f2364-7a36-447f-ac19-a93c01692858",
+      "name": "Load Disease Database"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an experienced medical assistant.\n\nToday's date is {{ $now.format('dd MMMM yyyy') }}.\n\nPatient Information:\n\nName: {{ $('Edit Fields').first().json.name }}\n\nAge: {{ $('Edit Fields').first().json.age }}\n\nGender: {{ $('Edit Fields').first().json.gender }}\n\nSymptoms: {{ $('Edit Fields').first().json.symptoms }}\n\nPossible Disease: {{ $('Disease Matching').first().json.matchedDisease }}\n\nSeverity: {{ $('Disease Matching').first().json.severity }}\n\nTreatment: {{ $('Disease Matching').first().json.treatment }}\n\nGenerate a professional medical report using the following format.\n\n# Medical Report\n\n**Patient Name:** {{ $('Edit Fields').first().json.name }}\n\n**Age:** {{ $('Edit Fields').first().json.age }}\n\n**Gender:** {{ $('Edit Fields').first().json.gender }}\n\n**Date of Report:** {{ $now.format('dd MMMM yyyy') }}\n\n---\n\n## 1. Patient Details\n\n- **Name:** {{ $('Edit Fields').first().json.name }}\n- **Age:** {{ $('Edit Fields').first().json.age }}\n- **Gender:** {{ $('Edit Fields').first().json.gender }}\n- **Presenting Symptoms:** {{ $('Edit Fields').first().json.symptoms }}\n\n---\n\n## 2. Possible Disease\n\nState the most likely disease:\n\n**{{ $('Disease Matching').first().json.matchedDisease }}**\n\nExplain in simple language why this disease matches the patient's symptoms.\n\n---\n\n## 3. Severity\n\nSeverity Level:\n\n**{{ $('Disease Matching').first().json.severity }}**\n\nExplain whether this condition is mild, moderate, or severe and why.\n\n---\n\n## 4. Recommended Treatment\n\nUse this treatment:\n\n{{ $('Disease Matching').first().json.treatment }}\n\nAlso explain how the treatment helps.\n\n---\n\n## 5. Home Care Advice\n\nProvide:\n- Rest recommendations\n- Hydration advice\n- Diet suggestions\n- Sleep recommendations\n- Hygiene precautions\n\n---\n\n## 6. Medicines\n\nMention common over-the-counter medicines that are generally used for symptom relief (if appropriate), but remind the patient to consult a doctor before taking medication.\n\n---\n\n## 7. When to Visit a Doctor\n\nList warning signs that require immediate medical attention.\n\n---\n\n## 8. Recovery Time\n\nMention the expected recovery period for this condition.\n\n---\n\n## 9. Prevention Tips\n\nGive practical prevention advice to reduce the chance of getting this illness again.\n\n---\n\n## 10. Disclaimer\n\nWrite:\n\n\"This report is AI-generated for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional for any medical concerns.\"",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        832,
+        0
+      ],
+      "id": "726946b1-9030-4e23-94a6-b691ce8b519a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        208
+      ],
+      "id": "d695ddc7-175d-4a93-9f8c-1b18dd4ee03c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PvbP7iGenVau54kC",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7985d428-83d6-4390-807f-cca849a1ac66",
+              "name": "=patient_name",
+              "value": "={{ $('Edit Fields').first().json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "fc75bd0f-364d-418b-9954-ed8f72666e39",
+              "name": "=possible_disease",
+              "value": "={{ $('Disease Matching').first().json.matchedDisease }}",
+              "type": "string"
+            },
+            {
+              "id": "465f7a17-2855-4df1-a59b-0e5c106e24ad",
+              "name": "=severity",
+              "value": "={{ $('Disease Matching').first().json.severity }}",
+              "type": "string"
+            },
+            {
+              "id": "25713b45-0160-459d-b8cc-957c4d24a773",
+              "name": "=treatment",
+              "value": "={{ $('Disease Matching').first().json.treatment }}",
+              "type": "string"
+            },
+            {
+              "id": "2346b62e-c9b9-4663-a144-b60995984b6b",
+              "name": "=ai_report",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1184,
+        0
+      ],
+      "id": "5a6aebc0-8134-47e2-8aa1-18866c1a2c4e",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Load Disease Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Disease Database": {
+      "main": [
+        [
+          {
+            "node": "Disease Matching",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disease Matching": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9e7f1745-23fe-43a7-9054-3fede1956758",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fda409eddb14b52793a22e35a047ce9c8c139bcc7f7df6f59b9559330fa91b68"
+  },
+  "nodeGroups": [],
+  "id": "1TPs6LDzH8PwVoVZ",
+  "tags": []
+}

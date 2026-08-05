@@ -22,9 +22,16 @@ services:
       DB_POSTGRESDB_DATABASE: medical_ai
       DB_POSTGRESDB_USER: postgres
       DB_POSTGRESDB_PASSWORD: postgres
+
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+
+      N8N_CORS_ALLOW_ORIGIN: "http://127.0.0.1:5500"
+      WEBHOOK_URL: "http://localhost:5678"
+
     depends_on:
       - postgres
 
 volumes:
   postgres_data:
-  
