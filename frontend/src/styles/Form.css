@@ -1,0 +1,686 @@
+/* =========================================
+   MEDICAL FORM
+========================================= */
+
+.medical-form {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+  padding: 42px 50px 50px;
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 15px 40px rgba(15, 23, 42, 0.10);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+
+  position: relative;
+  z-index: 20;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+  width: 100%;
+
+  margin: 0 0 28px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.form-group label {
+  display: block;
+
+  margin: 0 0 11px;
+
+  padding: 0;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  line-height: 1.3;
+
+  color: #111827;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   INPUT / SELECT / TEXTAREA
+========================================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  color: #111827;
+
+  font-family: inherit;
+
+  font-size: 17px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.form-group input {
+  height: 64px;
+
+  padding: 0 20px;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.form-group select {
+  height: 64px;
+
+  padding: 0 18px;
+
+  cursor: pointer;
+
+  appearance: auto;
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.form-group textarea {
+  min-height: 150px;
+
+  padding: 18px 20px;
+
+  resize: vertical;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #64748b;
+
+  opacity: 1;
+}
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  background: #f1f5f9;
+
+  cursor: not-allowed;
+
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.medical-form > button {
+  width: 100%;
+
+  min-height: 58px;
+
+  margin-top: 4px;
+
+  padding: 14px 20px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb 0%,
+      #147d91 100%
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.medical-form > button:hover {
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+.medical-form > button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+
+  transform: none;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading-content {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+
+.spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 3px solid rgba(255, 255, 255, 0.4);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+
+  .medical-form {
+    max-width: 760px;
+
+    padding: 38px 40px 44px;
+
+    border-radius: 22px;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+  }
+
+  .form-group label {
+    font-size: 16px;
+
+    margin-bottom: 10px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 60px;
+
+    font-size: 16px;
+  }
+
+  .form-group textarea {
+    min-height: 140px;
+
+    font-size: 16px;
+  }
+}
+
+
+/* =========================================
+   768px
+========================================= */
+
+@media (max-width: 768px) {
+
+  .medical-form {
+    width: 100%;
+
+    max-width: 700px;
+
+    padding: 34px 30px 40px;
+
+    border-radius: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 58px;
+  }
+
+  .form-group textarea {
+    min-height: 135px;
+  }
+}
+
+
+/* =========================================
+   480px
+========================================= */
+
+@media (max-width: 480px) {
+
+  .medical-form {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    margin: 0 !important;
+
+    padding:
+      28px
+      20px
+      32px !important;
+
+    border-radius: 20px;
+
+    box-shadow:
+      0 10px 28px rgba(15, 23, 42, 0.10);
+  }
+
+  .form-group {
+    width: 100%;
+
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    margin-bottom: 10px;
+
+    font-size: 16px;
+
+    line-height: 1.3;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+
+    height: 56px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    font-size: 16px;
+  }
+
+  .form-group textarea {
+    width: 100%;
+
+    min-height: 135px;
+
+    padding:
+      15px
+      16px;
+
+    font-size: 16px;
+  }
+
+  .medical-form > button {
+    width: 100%;
+
+    min-height: 56px;
+
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================
+   390px
+========================================= */
+
+@media (max-width: 390px) {
+
+  .medical-form {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    padding:
+      24px
+      16px
+      28px !important;
+
+    margin: 0 !important;
+
+    border-radius: 18px;
+
+    box-shadow:
+      0 8px 24px rgba(15, 23, 42, 0.10);
+  }
+
+
+  .form-group {
+    width: 100%;
+
+    margin-bottom: 22px;
+  }
+
+
+  .form-group label {
+    width: 100%;
+
+    margin-bottom: 9px;
+
+    font-size: 15px;
+
+    line-height: 1.3;
+  }
+
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+
+    max-width: 100%;
+
+    height: 54px;
+
+    padding:
+      0 14px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+  }
+
+
+  .form-group textarea {
+    width: 100%;
+
+    max-width: 100%;
+
+    min-height: 125px;
+
+    padding:
+      14px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    line-height: 1.45;
+  }
+
+
+  .medical-form > button {
+    width: 100%;
+
+    min-height: 54px;
+
+    padding:
+      12px
+      14px;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================
+   360px
+========================================= */
+
+@media (max-width: 360px) {
+
+  .medical-form {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    padding:
+      22px
+      14px
+      26px !important;
+  }
+
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+
+  .form-group label {
+    margin-bottom: 8px;
+
+    font-size: 14px;
+  }
+
+
+  .form-group input,
+  .form-group select {
+    height: 52px;
+
+    padding:
+      0 13px;
+
+    font-size: 14px;
+  }
+
+
+  .form-group textarea {
+    min-height: 120px;
+
+    padding:
+      13px;
+
+    font-size: 14px;
+  }
+
+
+  .medical-form > button {
+    min-height: 52px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================
+   320px
+========================================= */
+
+@media (max-width: 320px) {
+
+  .medical-form {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    min-width: 0 !important;
+
+    margin: 0 !important;
+
+    padding:
+      20px
+      12px
+      24px !important;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+  }
+
+
+  .form-group {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin-bottom: 19px;
+  }
+
+
+  .form-group label {
+    width: 100%;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.25;
+  }
+
+
+  .form-group input,
+  .form-group select {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    min-width: 0 !important;
+
+    height: 50px;
+
+    padding:
+      0 12px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+  }
+
+
+  .form-group textarea {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    min-width: 0 !important;
+
+    min-height: 115px;
+
+    padding:
+      12px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+  }
+
+
+  .medical-form > button {
+    width: 100% !important;
+
+    max-width: 100%;
+
+    min-height: 50px;
+
+    padding:
+      10px
+      8px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+  }
+
+
+  .loading-content {
+    gap: 6px;
+  }
+
+
+  .spinner {
+    width: 15px;
+    height: 15px;
+
+    border-width: 2px;
+  }
+}

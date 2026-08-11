@@ -1,0 +1,23 @@
+.header{
+    background:linear-gradient(135deg,#2563eb,#0f766e);
+    color:white;
+    padding:35px;
+    text-align:center;
+    border-radius:0 0 25px 25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.hospital-icon{
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+.header h1{
+    font-size:2.4rem;
+    margin-bottom:8px;
+}
+
+.header p{
+    font-size:1.05rem;
+    opacity:.9;
+}

@@ -1,0 +1,24 @@
+.footer{
+    margin-top:40px;
+    text-align:center;
+    padding:25px;
+    color:#555;
+}
+
+.tech-stack{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.tech-stack span{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:white;
+    padding:10px 18px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}

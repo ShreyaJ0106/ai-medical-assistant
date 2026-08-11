@@ -1,20 +1,31 @@
 import { useState } from "react";
+import Header from "./components/Header";
 import MedicalForm from "./components/MedicalForm";
 import Report from "./components/Report";
+import "./styles/App.css";
 
 function App() {
   const [report, setReport] = useState(null);
 
   return (
-    <div className="container">
-      <h1>🩺 AI Medical Assistant</h1>
-      <p className="subtitle">
-        AI Powered Disease Prediction and Medical Report
-      </p>
+    <div className="app">
 
-      <MedicalForm setReport={setReport} />
+      <Header />
 
-      {report && <Report report={report} />}
+      <main className="main-container">
+
+        <section className="form-card">
+          <MedicalForm setReport={setReport} />
+        </section>
+
+        {report && (
+          <section className="report-section">
+            <Report report={report} />
+          </section>
+        )}
+
+      </main>
+
     </div>
   );
 }
