@@ -45,6 +45,8 @@ Medical Report
 React UI
    ↓
 PDF / Print
+
+
 📂 Project Structure
 ai-medical-assistant/
 ├── backend/
@@ -54,22 +56,30 @@ ai-medical-assistant/
 ├── workflows/
 ├── screenshots/
 └── README.md
+
+
 ⚙️ Installation
+
 Backend
 cd backend
 npm install
 node server.js
+
 Frontend
+
 cd frontend
 npm install
 npm run dev
+
 Environment Variables
 
 Create backend/.env:
 
 PORT=5000
 N8N_WEBHOOK=http://localhost:5678/webhook/patient-intake
+
 🔌 API
+
 POST /api/report
 
 Example:
@@ -86,6 +96,8 @@ Example result:
 Disease: Food Poisoning
 Severity: Medium
 Match Score: 3
+
+
 🔄 n8n Workflow
 
 The n8n workflow receives patient information through a webhook, performs disease matching, sends the relevant information to Google Gemini AI, and returns the final medical report to the backend.
